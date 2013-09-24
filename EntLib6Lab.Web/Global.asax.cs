@@ -1,4 +1,6 @@
-﻿using System;
+﻿using EntLib6Lab.Web.Extensions;
+using Microsoft.Practices.Unity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -16,12 +18,20 @@ namespace EntLib6Lab.Web
     {
         protected void Application_Start()
         {
+            // Log.ApplicationStarting();
+
             AreaRegistration.RegisterAllAreas();
 
             WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            ConfigurationBootstrapper.Configure(new UnityContainer());
+
+            ControllerBuilder.Current.SetControllerFactory(typeof(CommonServiceLocatorControllerFactory)); 
+
+            // Log.ApplicationStarted();
         }
     }
 }

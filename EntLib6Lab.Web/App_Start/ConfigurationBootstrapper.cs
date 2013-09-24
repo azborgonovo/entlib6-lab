@@ -36,7 +36,7 @@ namespace EntLib6Lab.Web
                 .RegisterInstance<ValidatorFactory>(validationFactory)
                 
                 // Use registration by convention extension for registering app types; IProductsService
-                .RegisterTypes(AllClasses.FromAssemblies(Assembly.GetExecutingAssembly()),
+                .RegisterTypes(AllClasses.FromAssemblies(typeof(IProductsService).Assembly),
                                WithMappings.FromAllInterfacesInSameAssembly,
                                WithName.Default,
                                WithLifetime.ContainerControlled);
